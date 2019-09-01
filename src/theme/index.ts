@@ -5,7 +5,7 @@ import { colors } from '../constants';
  *  VARIABLES  *
  ***************/
 const typography: any = {
-  useNextVariants: true
+  useNextVariants: true,
 };
 
 const palette: any = {
@@ -13,13 +13,13 @@ const palette: any = {
     main: colors.PRIMARY_COLOR,
     dark: colors.DARK_COLOR,
     grey: colors.GREY_COLOR,
-    light: colors.LIGHT_COLOR
-  }
+    light: colors.LIGHT_COLOR,
+  },
 };
 
 const themeOptions = {
   typography,
-  palette
+  palette,
 };
 
 const theme = createMuiTheme(themeOptions);

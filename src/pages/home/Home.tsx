@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { HomeContainer } from './Home.styled';
+import { Container } from './Home.styled';
 import { CardForm } from '../../components';
 
 const Home = () => (
-    <HomeContainer>
+    <Container padding={40}>
       <CardForm />
-    </HomeContainer>
+    </Container>
   );
 
 export default Home;
