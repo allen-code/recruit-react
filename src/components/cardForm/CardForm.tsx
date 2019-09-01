@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import Input from '@material-ui/core/Input';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import * as React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { withFormik, FormikProps, Form } from 'formik';
+import { withFormik, FormikProps, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
 
@@ -27,31 +25,25 @@ interface CardFormInitialValueProps {
   expiryDate?: any;
 };
 
-const CardForm = (props: FormikProps<CardFormValueProps>) => {
-
-  const errorClass = (error: string) => error.length === 0 ? '' : 'has-error';
-
-    const {
+const CardForm = ({
         values,
         errors,
-        handleChange,
-        handleSubmit
-    } = props;
-
+        handleChange
+    }: FormikProps<CardFormValueProps>) => {
     return (
-        <Form>
-          <h2>Please fill in credit card details</h2>
-         <div>
-           <label htmlFor='ccNumber'>Credit card number</label>
-           <Input
-            name='ccNumber'
+      <Form>
+        <h2>Please fill in credit card details</h2>
+        <div>
+          <label htmlFor='ccCardNumber'>Credit card number</label>
+          <Field
+            name='ccCardNumber'
             placeholder='10 digit credit card'
             value={values.ccCardNumber}
             onChange={handleChange}  />
         </div>
         <div>
           <label htmlFor='cvc'>CVV number</label>
-          <Input
+          <Field
             name='cvc'
             placeholder='Three digits'
             value={values.cvc}
@@ -82,16 +74,19 @@ const FormikCardForm = withFormik<CardFormInitialValueProps, CardFormValueProps>
     }),
 
     validationSchema: Yup.object().shape({
-        ccCardNumber: Yup.number().test('len', 'Must be valid card number with 10 digits', val => val.toString().length === 10).required(),
-        cvc: Yup.number().test('len', 'Must be valid cvc number with 3 digits', val => val.toString().length === 3).required(),
+        ccCardNumber: Yup.number().min(0, 'Minimal value 0')
+                        .max(10, 'Maximum value 10').required('Must be valid card number'),
+        cvc: Yup.number().min(0, 'Minimal value 0')
+                        .max(3, 'Maximum value 3').required('Must be valid cvc number'),
         expiryDate: Yup.date().required()
     }),
+    
 
     handleSubmit(
         { ccCardNumber, cvc, expiryDate }: CardFormValueProps,
         { props, setErrors }
     ) {
-        log(ccCardNumber, cvc, expiryDate);
+        log('handleSubmit ', ccCardNumber, cvc, expiryDate);
     }
 })(CardForm);
 
