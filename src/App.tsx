@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import CssBaseline from "@material-ui/core/CssBaseline/CssBaseline";
 
-import { TopBar } from './components';
+import { TopBar, SideMenu } from './components';
+import { Home } from './pages';
 import { colors } from './constants';
 import logo from './logo.svg';
 
@@ -26,6 +27,8 @@ const App: React.FC = () => {
     <>
       <CssBaseline/>
       <TopBar toggleDrawerState={() => toggleDrawerState()} />
+      <SideMenu drawerState={drawerState} toggleDrawerState={() => toggleDrawerState()} />
+      <Home />
     </>
   );
 }
