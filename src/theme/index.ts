@@ -4,11 +4,11 @@ import { colors } from '../constants';
 /***************
  *  VARIABLES  *
  ***************/
-const typography = {
+const typography: any = {
   useNextVariants: true
 };
 
-const palette = {
+const palette: any = {
   primary: {
     main: colors.PRIMARY_COLOR,
     dark: colors.DARK_COLOR,
@@ -17,9 +17,11 @@ const palette = {
   }
 };
 
-const theme = createMuiTheme({
+const themeOptions = {
   typography,
   palette
-});
+};
+
+const theme = createMuiTheme(themeOptions);
 
 export default theme;
